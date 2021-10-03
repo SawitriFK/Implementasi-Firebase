@@ -1,5 +1,5 @@
-# Dilo---2---Incremental-Game
-Course 2 Dilo
+# IMPELEMENTASI FIREBASE
+Course 8 Dilo
 
 Build terdapat di Realese
 
@@ -9,3 +9,5 @@ Fitur :
     - Sepanjang game berlangsung
     - Saat pop-up muncul
 3. Leveling menjadi 5 tahap
+
+FIREBASE : V8.30
