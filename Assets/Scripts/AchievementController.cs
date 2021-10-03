@@ -1,17 +1,11 @@
 ﻿using System.Collections.Generic;
-
 using UnityEngine;
-
 using UnityEngine.UI;
 
-
-
 public class AchievementController : MonoBehaviour
-
 {
     // Instance ini mirip seperti pada GameManager, fungsinya adalah membuat sistem singleton
     // untuk memudahkan pemanggilan script yang bersifat manager dari script lain
-    public AudioSource AudioAchievement;
     private static AchievementController _instance = null;
     public static AchievementController Instance
     {
@@ -21,16 +15,15 @@ public class AchievementController : MonoBehaviour
             {
                 _instance = FindObjectOfType<AchievementController>();
             }
+
             return _instance;
         }
     }
-
 
     [SerializeField] private Transform _popUpTransform;
     [SerializeField] private Text _popUpText;
     [SerializeField] private float _popUpShowDuration = 3f;
     [SerializeField] private List<AchievementData> _achievementList;
-
 
     private float _popUpShowDurationCounter;
 
@@ -62,16 +55,11 @@ public class AchievementController : MonoBehaviour
 
     private void ShowAchivementPopUp(AchievementData achievement)
     {
-        AudioAchievement.Play();
         _popUpText.text = achievement.Title;
         _popUpShowDurationCounter = _popUpShowDuration;
         _popUpTransform.localScale = Vector2.right;
-
     }
-
 }
-
-
 
 // System.Serializable digunakan agar object dari script bisa di-serialize
 // dan bisa di-inputkan dari Inspector, jika tidak terdapat ini, maka variable tidak akan muncul di inspector
@@ -83,8 +71,6 @@ public class AchievementData
     public string Value;
     public bool IsUnlocked;
 }
-
-
 
 public enum AchievementType
 {

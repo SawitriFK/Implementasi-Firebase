@@ -1,36 +1,21 @@
 ﻿
 using System.Collections.Generic;
-
 using UnityEngine;
-
 using UnityEngine.UI;
 
 
 
 public class GameManager : MonoBehaviour
-
 {
-
     private static GameManager _instance = null;
-
     public static GameManager Instance
-
     {
-
         get
-
         {
-
             if (_instance == null)
-
             {
-
                 _instance = FindObjectOfType<GameManager>();
-
             }
-
-
-
             return _instance;
 
         }
@@ -48,7 +33,7 @@ public class GameManager : MonoBehaviour
     public Sprite[] ResourcesSprites;
     public Transform ResourcesParent;
     public ResourceController ResourcePrefab;
-    
+
     public TapText TapTextPrefab;
     public Transform CoinIcon;
 
@@ -60,6 +45,8 @@ public class GameManager : MonoBehaviour
     private float _collectSecond;
 
     public double _totalGold;
+    public float SaveDelay = 5f;
+    private float _saveDelayCounter;
     private void Start()
     {
         AddAllResources();
@@ -68,8 +55,11 @@ public class GameManager : MonoBehaviour
 
     private void Update()
     {
+        float deltaTime = Time.unscaledDeltaTime;
+        _saveDelayCounter -= deltaTime;
+
         // Fungsi untuk selalu mengeksekusi CollectPerSecond setiap detik 
-        _collectSecond += Time.unscaledDeltaTime;
+        _collectSecond += deltaTime;
         if (_collectSecond >= 1f)
         {
             CollectPerSecond();
@@ -151,8 +141,12 @@ public class GameManager : MonoBehaviour
     public void AddGold(double value)
     {
         UserDataManager.Progress.Gold += value;
-        GoldInfo.text = $"Gold: {UserDataManager.Progress.Gold.ToString("0") }";
-        UserDataManager.Save();
+        GoldInfo.text = $"Gold: { UserDataManager.Progress.Gold.ToString("0") }";
+        UserDataManager.Save(_saveDelayCounter < 0f);
+        if (_saveDelayCounter < 0f)
+        {
+            _saveDelayCounter = SaveDelay;
+        }
     }
     public void CollectByTap(Vector3 tapPosition, Transform parent)
     {
