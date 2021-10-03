@@ -9,3 +9,6 @@ Fitur :
     - Sepanjang game berlangsung
     - Saat pop-up muncul
 3. Leveling menjadi 5 tahap
+
+BUILD REALESE
+https://github.com/SawitriFK/Implementasi-Firebase/releases/tag/v1.0
